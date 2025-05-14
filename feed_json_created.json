@@ -1,16 +1,16 @@
 {
     "version": "https://jsonfeed.org/version/1",
     "title": "Aptalca's Musings",
-    "home_page_url": "https://musings.aptalca.github.io/",
-    "feed_url": "https://musings.aptalca.github.io/feed_json_created.json",
+    "home_page_url": "https://aptalca.github.io/musings/",
+    "feed_url": "https://aptalca.github.io/musings/feed_json_created.json",
     "description": "Aptalca's Musings",
-    "icon": "https://musings.aptalca.github.io/images/logo.png",
+    "icon": "https://aptalca.github.io/musings/images/logo.png",
     "authors": [],
     "language": "en",
     "items": [
         {
-            "id": "https://musings.aptalca.github.io/Other/zfs_send_receive/",
-            "url": "https://musings.aptalca.github.io/Other/zfs_send_receive/",
+            "id": "https://aptalca.github.io/musings/Other/zfs_send_receive/",
+            "url": "https://aptalca.github.io/musings/Other/zfs_send_receive/",
             "title": "ZFS Send/Receive",
             "content_html": "<h1>ZFS Send/Receive</h1>\n<p><code>zfs send</code> from main server and <code>zfs receive</code> on backup server</p>\n<h2>General Facts For Consideration</h2>\n<p>1) Both <code>zfs send</code> and <code>zfs receive</code> op...</p>",
             "image": null,
@@ -21,8 +21,8 @@
             ]
         },
         {
-            "id": "https://musings.aptalca.github.io/Other/zfshost/",
-            "url": "https://musings.aptalca.github.io/Other/zfshost/",
+            "id": "https://aptalca.github.io/musings/Other/zfshost/",
+            "url": "https://aptalca.github.io/musings/Other/zfshost/",
             "title": "Zfshost",
             "content_html": "<h1>Zfshost</h1>\n<p>Details of my new mini homelab server</p>\n<h2>Hardware</h2>\n<ul>\n<li>Jonsbo N2 case</li>\n<li>Purple CWWK/Topton board with i3-N305 processor and Jonsbo CPU fan (2 eth ins...</li>\n</ul>",
             "image": null,
