@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    
+    <title>Aptalca&#39;s Musings</title>
+    <description>Aptalca&#39;s Musings</description>
+    <link>https://musings.aptalca.github.io/</link>
+    <atom:link href="https://musings.aptalca.github.io/feed_rss_created.xml" rel="self" type="application/rss+xml" />
+
+    
+    
+    <docs>https://github.com/aptalca/musings</docs>
+    <language>en</language>
+
+    
+    <pubDate>Wed, 14 May 2025 18:22:44 -0000</pubDate>
+    <lastBuildDate>Wed, 14 May 2025 18:22:44 -0000</lastBuildDate>
+    <ttl>1440</ttl>
+
+    
+    <generator>MkDocs RSS plugin - v1.17.1</generator>
+
+    
+    
+    <image>
+      <url>https://musings.aptalca.github.io/images/logo.png</url>
+      <title>Aptalca's Musings</title>
+      <link>https://musings.aptalca.github.io/</link>
+    </image>
+    
+
+    
+    
+    <item>
+      <title>ZFS Send/Receive</title>
+      
+      
+      
+      
+        
+      <category>Other</category>
+        
+      
+      <description>&lt;h1&gt;ZFS Send/Receive&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;zfs send&lt;/code&gt; from main server and &lt;code&gt;zfs receive&lt;/code&gt; on backup server&lt;/p&gt;
+&lt;h2&gt;General Facts For Consideration&lt;/h2&gt;
+&lt;p&gt;1) Both &lt;code&gt;zfs send&lt;/code&gt; and &lt;code&gt;zfs receive&lt;/code&gt; op...&lt;/p&gt;</description>
+      <link>https://musings.aptalca.github.io/Other/zfs_send_receive/</link>
+      <pubDate>Wed, 14 May 2025 18:15:40 +0000</pubDate>
+      <source url="https://musings.aptalca.github.io/feed_rss_created.xml">Aptalca's Musings</source>
+      
+      <guid isPermaLink="true">https://musings.aptalca.github.io/Other/zfs_send_receive/</guid>
+      
+    </item>
+    
+    <item>
+      <title>Zfshost</title>
+      
+      
+      
+      
+        
+      <category>Other</category>
+        
+      
+      <description>&lt;h1&gt;Zfshost&lt;/h1&gt;
+&lt;p&gt;Details of my new mini homelab server&lt;/p&gt;
+&lt;h2&gt;Hardware&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Jonsbo N2 case&lt;/li&gt;
+&lt;li&gt;Purple CWWK/Topton board with i3-N305 processor and Jonsbo CPU fan (2 eth ins...&lt;/li&gt;
+&lt;/ul&gt;</description>
+      <link>https://musings.aptalca.github.io/Other/zfshost/</link>
+      <pubDate>Wed, 14 May 2025 18:15:40 +0000</pubDate>
+      <source url="https://musings.aptalca.github.io/feed_rss_created.xml">Aptalca's Musings</source>
+      
+      <guid isPermaLink="true">https://musings.aptalca.github.io/Other/zfshost/</guid>
+      
+    </item>
+    
+  </channel>
+</rss>
