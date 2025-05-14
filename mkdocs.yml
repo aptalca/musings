@@ -1,0 +1,70 @@
+site_name: Aptalca's Musings
+site_description: Aptalca's Musings
+site_url: https://musings.aptalca.github.io/
+edit_uri: ""
+repo_url: https://github.com/aptalca/musings
+theme:
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  features:
+    - content.code.copy
+    - navigation.instant
+    - search.suggest
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - search.highlight
+  name: material
+  custom_dir: overrides
+  favicon: images/logo.png
+  logo: images/logo.png
+  font:
+    code: Roboto Mono
+  icon:
+    repo: fontawesome/brands/github
+  font:
+    text: Roboto
+    code: Roboto Mono
+markdown_extensions:
+  - pymdownx.blocks.html
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - mdx_truly_sane_lists
+  - admonition
+  - pymdownx.details
+extra:
+  social:
+    - icon: fontawesome/solid/rss 
+      link: /feed_rss_created.xml
+  homepage: https://musings.aptalca.github.io/
+plugins:
+  - tags
+  - git-revision-date-localized:
+      type: timeago
+      fallback_to_build_date: true
+      enable_creation_date: true
+      enabled: true
+  - search
+  - rss:
+      match_path: .*/.*.md 
+      date_from_meta:
+        as_creation: date
+      image: https://musings.aptalca.github.io/images/logo.png
+      pretty_print: true
+      categories:
+        - categories
+        - tags 
