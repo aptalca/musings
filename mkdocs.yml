@@ -1,6 +1,6 @@
 site_name: Aptalca's Musings
 site_description: Aptalca's Musings
-site_url: https://musings.aptalca.github.io/
+site_url: https://aptalca.github.io/musings
 edit_uri: ""
 repo_url: https://github.com/aptalca/musings
 theme:
@@ -50,7 +50,7 @@ extra:
   social:
     - icon: fontawesome/solid/rss 
       link: /feed_rss_created.xml
-  homepage: https://musings.aptalca.github.io/
+  homepage: https://aptalca.github.io/musings
 plugins:
   - tags
   - git-revision-date-localized:
@@ -63,7 +63,7 @@ plugins:
       match_path: .*/.*.md 
       date_from_meta:
         as_creation: date
-      image: https://musings.aptalca.github.io/images/logo.png
+      image: https://aptalca.github.io/musings/images/logo.png
       pretty_print: true
       categories:
         - categories
