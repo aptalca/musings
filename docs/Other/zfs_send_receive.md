@@ -7,24 +7,24 @@ tags:
 `zfs send` from main server and `zfs receive` on backup server
 
 ## General Facts For Consideration
-1) Both `zfs send` and `zfs receive` operations require plenty of permissions, which can be assigned to an unprivileged user via `zfs allow` (we should not run the script as root on either end as most guides suggest)
-2) If the source dataset is auto-mounted, it will be attempted to be mounted on the receiving end, which can be a problem
-3) If a backup dataset is mounted, there is a possibility (highly likely if `atime` is on) that it will be modified on the receiving end, semi-breaking future incremental updates
-4) For scripted operations, one would need to have an ssh key without passphrase on either the main or the backup server, for the other one.
-5) Unlike rsync, which compares source and destination data for diff calculation, `zfs send` only compares 2 snapshots on the source end to calculate diff, meaning the source and destination must contain a common snapshot, which should be used as the base of the diff on the sending end
-6) All properties of the source dataset will be set on the backup dataset as is, which means any property that is `inherited` on the source will also be set as `inherited` on the backup, so the actual value may differ (such as the mountpoint)
-7) If the machine with the ssh key gets compromised, the other machine is also compromised due to no ssh key passphrase
-8) If the source machine gets compromised (ransomwared), the changes can propagate to backups
-9) If `zfs allow` has the `destroy` permission, a compromised machine can potentially destroy all zfs data including the pools, datasets and the snapshots.
-10) Initial `send` requires that the destination does not have the existing dataset (you can force but I'd rather keep it clean and simple)
-11) Incremental `send` requires the destination state matches the base snapshot used in `send`
+1. Both `zfs send` and `zfs receive` operations require plenty of permissions, which can be assigned to an unprivileged user via `zfs allow` (we should not run the script as root on either end as most guides suggest)
+2. If the source dataset is auto-mounted, it will be attempted to be mounted on the receiving end, which can be a problem
+3. If a backup dataset is mounted, there is a possibility (highly likely if `atime` is on) that it will be modified on the receiving end, semi-breaking future incremental updates
+4. For scripted operations, one would need to have an ssh key without passphrase on either the main or the backup server, for the other one.
+5. Unlike rsync, which compares source and destination data for diff calculation, `zfs send` only compares 2 snapshots on the source end to calculate diff, meaning the source and destination must contain a common snapshot, which should be used as the base of the diff on the sending end
+6. All properties of the source dataset will be set on the backup dataset as is, which means any property that is `inherited` on the source will also be set as `inherited` on the backup, so the actual value may differ (such as the mountpoint)
+7. If the machine with the ssh key gets compromised, the other machine is also compromised due to no ssh key passphrase
+8. If the source machine gets compromised (ransomwared), the changes can propagate to backups
+9. If `zfs allow` has the `destroy` permission, a compromised machine can potentially destroy all zfs data including the pools, datasets and the snapshots.
+10. Initial `send` requires that the destination does not have the existing dataset (you can force but I'd rather keep it clean and simple)
+11. Incremental `send` requires the destination state matches the base snapshot used in `send`
 
 ## Plan
-- Due to `1)` and `4)` above, we will use a dedicated unprivileged linux user `zfsbackup` (not in sudoers) on both the sending and the receiving ends
-  - On the sending end, the user will need the `zfs allow` perms `create,mount,rename,send,snapshot` (`create` and `mount` are there because they are required by others) (we do not assign the `destroy` perm due to `9)`)
-  - On the receiving end, the user will need the `zfs allow` perms `atime,canmount,create,mount,readonly,receive,rename` (`create` and `mount` are there because they are required by others) (we do not assign the `destroy` perm due to `9)`)
+- Due to `1.` and `4.` above, we will use a dedicated unprivileged linux user `zfsbackup` (not in sudoers) on both the sending and the receiving ends
+  - On the sending end, the user will need the `zfs allow` perms `create,mount,rename,send,snapshot` (`create` and `mount` are there because they are required by others) (we do not assign the `destroy` perm due to `9.`)
+  - On the receiving end, the user will need the `zfs allow` perms `atime,canmount,create,mount,readonly,receive,rename` (`create` and `mount` are there because they are required by others) (we do not assign the `destroy` perm due to `9.`)
   - Allow perms are per user per dataset and are inherited. Existing perms can be checked via `zfs allow <pool>/<dataset>`
-- To prevent issues due to `2)` and `3)`, we will use the options `-o canmount=noauto -u -o readonly=on` because the first 2 will prevent mounting on the receiving end and the 3rd will prevent modifications (for good measure).
+- To prevent issues due to `2.` and `3.`, we will use the options `-o canmount=noauto -u -o readonly=on` because the first 2 will prevent mounting on the receiving end and the 3rd will prevent modifications (for good measure).
   - We can also add `-o atime=off` if we do want to mount them, but if it's read only, that should not be necessary.
   - These options are overridden permanently on the receiving end. If we ever have to recover from these backups, we need to kee in mind that our backup datasets have altered properties, which may need to be reverted after a restore. It is prudent to keep these alterations to a minimum so a potential restore doesn't get too complicated.
 - Picking the receiving end as the initator and holder of the ssh key with no passphrase because that machine is a dedicated backup machine, has no public facing services and thus less likely to be compromised.
@@ -46,24 +46,24 @@ tags:
 ## Specific Steps
 
 ### Initial sync
-1) Let's assume we're syncing `zarray/Books` on main machine to `pool/remotebackups/zarray/Books` on the backup machine
-2) Add permissions to source dataset on main machine: `sudo zfs allow zfsbackup create,mount,rename,send,snapshot zarray/Books`
-3) Create the parent pool/dataset on the backup machine: `sudo zfs create -o canmount=noauto -o readonly=on pool/remotebackups/zarray`
-4) Add permissions to backup parent pool/dataset on backup machine: `sudo zfs allow zfsbackup atime,canmount,create,mount,readonly,receive,rename pool/remotebackups/zarray`
-5) Log into `zfsbackup` on the backup machine: `su zfsbackup`
-6) Create snapshot on the source dataset via ssh: `ssh zfsbackup@MAINSERVERIP zfs snapshot zarray/Books@remotebackup-snapshot`
-7) Perform initial sync via ssh: `ssh zfsbackup@MAINSERVERIP zfs send -v zarray/Books@remotebackup-snapshot | zfs receive -o canmount=noauto -u -o readonly=true pool/remotebackups/zarray/Books`
+1. Let's assume we're syncing `zarray/Books` on main machine to `pool/remotebackups/zarray/Books` on the backup machine
+2. Add permissions to source dataset on main machine: `sudo zfs allow zfsbackup create,mount,rename,send,snapshot zarray/Books`
+3. Create the parent pool/dataset on the backup machine: `sudo zfs create -o canmount=noauto -o readonly=on pool/remotebackups/zarray`
+4. Add permissions to backup parent pool/dataset on backup machine: `sudo zfs allow zfsbackup atime,canmount,create,mount,readonly,receive,rename pool/remotebackups/zarray`
+5. Log into `zfsbackup` on the backup machine: `su zfsbackup`
+6. Create snapshot on the source dataset via ssh: `ssh zfsbackup@MAINSERVERIP zfs snapshot zarray/Books@remotebackup-snapshot`
+7. Perform initial sync via ssh: `ssh zfsbackup@MAINSERVERIP zfs send -v zarray/Books@remotebackup-snapshot | zfs receive -o canmount=noauto -u -o readonly=true pool/remotebackups/zarray/Books`
 
 ### Subsequent Incremental Sync
-1) Log into `zfsbackup` on the backup machine: `su zfsbackup`
-2) Rotate snapshot on the source dataset via ssh: `ssh zfsbackup@MAINSERVERIP zfs rename zarray/Books@remotebackup-snapshot zarray/Books@remotebackup-snapshot-1`
-3) Create new snapshot on the source dataset via ssh: `ssh zfsbackup@MAINSERVERIP zfs snapshot zarray/Books@remotebackup-snapshot`
-4) Rotate snapshot on the backup dataset: `zfs rename pool/remotebackups/zarray/Books@remotebackup-snapshot pool/remotebackups/zarray/Books@remotebackup-snapshot-1`
-5) Perform incremental sync via ssh: `ssh zfsbackup@MAINSERVERIP zfs send -vi zarray/Books@remotebackup-snapshot-1 zarray/Books@remotebackup-snapshot | zfs receive -o canmount=noauto -u -o readonly=true pool/remotebackups/zarray/Books`
+1. Log into `zfsbackup` on the backup machine: `su zfsbackup`
+2. Rotate snapshot on the source dataset via ssh: `ssh zfsbackup@MAINSERVERIP zfs rename zarray/Books@remotebackup-snapshot zarray/Books@remotebackup-snapshot-1`
+3. Create new snapshot on the source dataset via ssh: `ssh zfsbackup@MAINSERVERIP zfs snapshot zarray/Books@remotebackup-snapshot`
+4. Rotate snapshot on the backup dataset: `zfs rename pool/remotebackups/zarray/Books@remotebackup-snapshot pool/remotebackups/zarray/Books@remotebackup-snapshot-1`
+5. Perform incremental sync via ssh: `ssh zfsbackup@MAINSERVERIP zfs send -vi zarray/Books@remotebackup-snapshot-1 zarray/Books@remotebackup-snapshot | zfs receive -o canmount=noauto -u -o readonly=true pool/remotebackups/zarray/Books`
 
 ### Clean Up After Sync
-1) On the main machine edit the root crontab via `sudo crontab -e` and add an entry to delete the rotated snapshot: `17 0 * * * zfs destroy zarray/Books@remotebackup-snapshot-1`
-2) On the backup machine edit the root crontab via `sudo crontab -e` and add an entry to delete the rotated snapshot: `17 0 * * * zfs destroy pool/remotebackups/zarray/Books@remotebackup-snapshot-1`
+1. On the main machine edit the root crontab via `sudo crontab -e` and add an entry to delete the rotated snapshot: `17 0 * * * zfs destroy zarray/Books@remotebackup-snapshot-1`
+2. On the backup machine edit the root crontab via `sudo crontab -e` and add an entry to delete the rotated snapshot: `17 0 * * * zfs destroy pool/remotebackups/zarray/Books@remotebackup-snapshot-1`
 
 ## My Ugly Script
 
