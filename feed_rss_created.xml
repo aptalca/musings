@@ -13,8 +13,8 @@
     <language>en</language>
 
     
-    <pubDate>Sat, 17 May 2025 18:32:09 -0000</pubDate>
-    <lastBuildDate>Sat, 17 May 2025 18:32:09 -0000</lastBuildDate>
+    <pubDate>Sat, 17 May 2025 20:51:24 -0000</pubDate>
+    <lastBuildDate>Sat, 17 May 2025 20:51:24 -0000</lastBuildDate>
     <ttl>1440</ttl>
 
     
@@ -30,6 +30,26 @@
     
 
     
+    
+    <item>
+      <title>Cellular Backup</title>
+      
+      
+      
+      
+        
+      <category>Other</category>
+        
+      
+      <description>&lt;h1&gt;Cellular Backup&lt;/h1&gt;
+&lt;p&gt;I spend quite a bit of time away from home and I do have a few somewhat critical services running in my homelab that I would like to be ab...&lt;/p&gt;</description>
+      <link>https://aptalca.github.io/musings/Other/cellular_backup/</link>
+      <pubDate>Sat, 17 May 2025 20:50:54 +0000</pubDate>
+      <source url="https://aptalca.github.io/musings/feed_rss_created.xml">Aptalca's Musings</source>
+      
+      <guid isPermaLink="true">https://aptalca.github.io/musings/Other/cellular_backup/</guid>
+      
+    </item>
     
     <item>
       <title>ZFS Send/Receive</title>

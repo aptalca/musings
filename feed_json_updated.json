@@ -9,6 +9,18 @@
     "language": "en",
     "items": [
         {
+            "id": "https://aptalca.github.io/musings/Other/cellular_backup/",
+            "url": "https://aptalca.github.io/musings/Other/cellular_backup/",
+            "title": "Cellular Backup",
+            "content_html": "<h1>Cellular Backup</h1>\n<p>I spend quite a bit of time away from home and I do have a few somewhat critical services running in my homelab that I would like to be ab...</p>",
+            "image": null,
+            "date_modified": "2025-05-17T20:50:54+00:00",
+            "authors": [],
+            "tags": [
+                "Other"
+            ]
+        },
+        {
             "id": "https://aptalca.github.io/musings/Other/zfs_send_receive/",
             "url": "https://aptalca.github.io/musings/Other/zfs_send_receive/",
             "title": "ZFS Send/Receive",
