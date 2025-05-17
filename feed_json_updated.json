@@ -12,9 +12,9 @@
             "id": "https://aptalca.github.io/musings/Other/zfs_send_receive/",
             "url": "https://aptalca.github.io/musings/Other/zfs_send_receive/",
             "title": "ZFS Send/Receive",
-            "content_html": "<h1>ZFS Send/Receive</h1>\n<p><code>zfs send</code> from main server and <code>zfs receive</code> on backup server</p>\n<h2>General Facts For Consideration</h2>\n<p>1) Both <code>zfs send</code> and <code>zfs receive</code> op...</p>",
+            "content_html": "<h1>ZFS Send/Receive</h1>\n<p><code>zfs send</code> from main server and <code>zfs receive</code> on backup server</p>\n<h2>General Facts For Consideration</h2>\n<ol>\n<li>Both <code>zfs send</code> and <code>zfs receive</code> op...</li>\n</ol>",
             "image": null,
-            "date_modified": "2025-05-14T18:15:40+00:00",
+            "date_modified": "2025-05-17T18:31:40+00:00",
             "authors": [],
             "tags": [
                 "Other"

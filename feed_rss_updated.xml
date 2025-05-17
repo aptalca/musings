@@ -13,8 +13,8 @@
     <language>en</language>
 
     
-    <pubDate>Wed, 14 May 2025 18:26:08 -0000</pubDate>
-    <lastBuildDate>Wed, 14 May 2025 18:26:08 -0000</lastBuildDate>
+    <pubDate>Sat, 17 May 2025 18:32:09 -0000</pubDate>
+    <lastBuildDate>Sat, 17 May 2025 18:32:09 -0000</lastBuildDate>
     <ttl>1440</ttl>
 
     
@@ -44,9 +44,11 @@
       <description>&lt;h1&gt;ZFS Send/Receive&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;zfs send&lt;/code&gt; from main server and &lt;code&gt;zfs receive&lt;/code&gt; on backup server&lt;/p&gt;
 &lt;h2&gt;General Facts For Consideration&lt;/h2&gt;
-&lt;p&gt;1) Both &lt;code&gt;zfs send&lt;/code&gt; and &lt;code&gt;zfs receive&lt;/code&gt; op...&lt;/p&gt;</description>
+&lt;ol&gt;
+&lt;li&gt;Both &lt;code&gt;zfs send&lt;/code&gt; and &lt;code&gt;zfs receive&lt;/code&gt; op...&lt;/li&gt;
+&lt;/ol&gt;</description>
       <link>https://aptalca.github.io/musings/Other/zfs_send_receive/</link>
-      <pubDate>Wed, 14 May 2025 18:15:40 +0000</pubDate>
+      <pubDate>Sat, 17 May 2025 18:31:40 +0000</pubDate>
       <source url="https://aptalca.github.io/musings/feed_rss_updated.xml">Aptalca's Musings</source>
       
       <guid isPermaLink="true">https://aptalca.github.io/musings/Other/zfs_send_receive/</guid>

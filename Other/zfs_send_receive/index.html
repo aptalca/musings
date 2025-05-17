@@ -664,26 +664,28 @@
 <h1 id="zfs-sendreceive">ZFS Send/Receive</h1>
 <p><code>zfs send</code> from main server and <code>zfs receive</code> on backup server</p>
 <h2 id="general-facts-for-consideration">General Facts For Consideration</h2>
-<p>1) Both <code>zfs send</code> and <code>zfs receive</code> operations require plenty of permissions, which can be assigned to an unprivileged user via <code>zfs allow</code> (we should not run the script as root on either end as most guides suggest)
-2) If the source dataset is auto-mounted, it will be attempted to be mounted on the receiving end, which can be a problem
-3) If a backup dataset is mounted, there is a possibility (highly likely if <code>atime</code> is on) that it will be modified on the receiving end, semi-breaking future incremental updates
-4) For scripted operations, one would need to have an ssh key without passphrase on either the main or the backup server, for the other one.
-5) Unlike rsync, which compares source and destination data for diff calculation, <code>zfs send</code> only compares 2 snapshots on the source end to calculate diff, meaning the source and destination must contain a common snapshot, which should be used as the base of the diff on the sending end
-6) All properties of the source dataset will be set on the backup dataset as is, which means any property that is <code>inherited</code> on the source will also be set as <code>inherited</code> on the backup, so the actual value may differ (such as the mountpoint)
-7) If the machine with the ssh key gets compromised, the other machine is also compromised due to no ssh key passphrase
-8) If the source machine gets compromised (ransomwared), the changes can propagate to backups
-9) If <code>zfs allow</code> has the <code>destroy</code> permission, a compromised machine can potentially destroy all zfs data including the pools, datasets and the snapshots.
-10) Initial <code>send</code> requires that the destination does not have the existing dataset (you can force but I'd rather keep it clean and simple)
-11) Incremental <code>send</code> requires the destination state matches the base snapshot used in <code>send</code></p>
+<ol>
+<li>Both <code>zfs send</code> and <code>zfs receive</code> operations require plenty of permissions, which can be assigned to an unprivileged user via <code>zfs allow</code> (we should not run the script as root on either end as most guides suggest)</li>
+<li>If the source dataset is auto-mounted, it will be attempted to be mounted on the receiving end, which can be a problem</li>
+<li>If a backup dataset is mounted, there is a possibility (highly likely if <code>atime</code> is on) that it will be modified on the receiving end, semi-breaking future incremental updates</li>
+<li>For scripted operations, one would need to have an ssh key without passphrase on either the main or the backup server, for the other one.</li>
+<li>Unlike rsync, which compares source and destination data for diff calculation, <code>zfs send</code> only compares 2 snapshots on the source end to calculate diff, meaning the source and destination must contain a common snapshot, which should be used as the base of the diff on the sending end</li>
+<li>All properties of the source dataset will be set on the backup dataset as is, which means any property that is <code>inherited</code> on the source will also be set as <code>inherited</code> on the backup, so the actual value may differ (such as the mountpoint)</li>
+<li>If the machine with the ssh key gets compromised, the other machine is also compromised due to no ssh key passphrase</li>
+<li>If the source machine gets compromised (ransomwared), the changes can propagate to backups</li>
+<li>If <code>zfs allow</code> has the <code>destroy</code> permission, a compromised machine can potentially destroy all zfs data including the pools, datasets and the snapshots.</li>
+<li>Initial <code>send</code> requires that the destination does not have the existing dataset (you can force but I'd rather keep it clean and simple)</li>
+<li>Incremental <code>send</code> requires the destination state matches the base snapshot used in <code>send</code></li>
+</ol>
 <h2 id="plan">Plan</h2>
 <ul>
-<li>Due to <code>1)</code> and <code>4)</code> above, we will use a dedicated unprivileged linux user <code>zfsbackup</code> (not in sudoers) on both the sending and the receiving ends<ul>
-<li>On the sending end, the user will need the <code>zfs allow</code> perms <code>create,mount,rename,send,snapshot</code> (<code>create</code> and <code>mount</code> are there because they are required by others) (we do not assign the <code>destroy</code> perm due to <code>9)</code>)</li>
-<li>On the receiving end, the user will need the <code>zfs allow</code> perms <code>atime,canmount,create,mount,readonly,receive,rename</code> (<code>create</code> and <code>mount</code> are there because they are required by others) (we do not assign the <code>destroy</code> perm due to <code>9)</code>)</li>
+<li>Due to <code>1.</code> and <code>4.</code> above, we will use a dedicated unprivileged linux user <code>zfsbackup</code> (not in sudoers) on both the sending and the receiving ends<ul>
+<li>On the sending end, the user will need the <code>zfs allow</code> perms <code>create,mount,rename,send,snapshot</code> (<code>create</code> and <code>mount</code> are there because they are required by others) (we do not assign the <code>destroy</code> perm due to <code>9.</code>)</li>
+<li>On the receiving end, the user will need the <code>zfs allow</code> perms <code>atime,canmount,create,mount,readonly,receive,rename</code> (<code>create</code> and <code>mount</code> are there because they are required by others) (we do not assign the <code>destroy</code> perm due to <code>9.</code>)</li>
 <li>Allow perms are per user per dataset and are inherited. Existing perms can be checked via <code>zfs allow &lt;pool&gt;/&lt;dataset&gt;</code></li>
 </ul>
 </li>
-<li>To prevent issues due to <code>2)</code> and <code>3)</code>, we will use the options <code>-o canmount=noauto -u -o readonly=on</code> because the first 2 will prevent mounting on the receiving end and the 3rd will prevent modifications (for good measure).<ul>
+<li>To prevent issues due to <code>2.</code> and <code>3.</code>, we will use the options <code>-o canmount=noauto -u -o readonly=on</code> because the first 2 will prevent mounting on the receiving end and the 3rd will prevent modifications (for good measure).<ul>
 <li>We can also add <code>-o atime=off</code> if we do want to mount them, but if it's read only, that should not be necessary.</li>
 <li>These options are overridden permanently on the receiving end. If we ever have to recover from these backups, we need to kee in mind that our backup datasets have altered properties, which may need to be reverted after a restore. It is prudent to keep these alterations to a minimum so a potential restore doesn't get too complicated.</li>
 </ul>
@@ -712,22 +714,28 @@
 </ul>
 <h2 id="specific-steps">Specific Steps</h2>
 <h3 id="initial-sync">Initial sync</h3>
-<p>1) Let's assume we're syncing <code>zarray/Books</code> on main machine to <code>pool/remotebackups/zarray/Books</code> on the backup machine
-2) Add permissions to source dataset on main machine: <code>sudo zfs allow zfsbackup create,mount,rename,send,snapshot zarray/Books</code>
-3) Create the parent pool/dataset on the backup machine: <code>sudo zfs create -o canmount=noauto -o readonly=on pool/remotebackups/zarray</code>
-4) Add permissions to backup parent pool/dataset on backup machine: <code>sudo zfs allow zfsbackup atime,canmount,create,mount,readonly,receive,rename pool/remotebackups/zarray</code>
-5) Log into <code>zfsbackup</code> on the backup machine: <code>su zfsbackup</code>
-6) Create snapshot on the source dataset via ssh: <code>ssh zfsbackup@MAINSERVERIP zfs snapshot zarray/Books@remotebackup-snapshot</code>
-7) Perform initial sync via ssh: <code>ssh zfsbackup@MAINSERVERIP zfs send -v zarray/Books@remotebackup-snapshot | zfs receive -o canmount=noauto -u -o readonly=true pool/remotebackups/zarray/Books</code></p>
+<ol>
+<li>Let's assume we're syncing <code>zarray/Books</code> on main machine to <code>pool/remotebackups/zarray/Books</code> on the backup machine</li>
+<li>Add permissions to source dataset on main machine: <code>sudo zfs allow zfsbackup create,mount,rename,send,snapshot zarray/Books</code></li>
+<li>Create the parent pool/dataset on the backup machine: <code>sudo zfs create -o canmount=noauto -o readonly=on pool/remotebackups/zarray</code></li>
+<li>Add permissions to backup parent pool/dataset on backup machine: <code>sudo zfs allow zfsbackup atime,canmount,create,mount,readonly,receive,rename pool/remotebackups/zarray</code></li>
+<li>Log into <code>zfsbackup</code> on the backup machine: <code>su zfsbackup</code></li>
+<li>Create snapshot on the source dataset via ssh: <code>ssh zfsbackup@MAINSERVERIP zfs snapshot zarray/Books@remotebackup-snapshot</code></li>
+<li>Perform initial sync via ssh: <code>ssh zfsbackup@MAINSERVERIP zfs send -v zarray/Books@remotebackup-snapshot | zfs receive -o canmount=noauto -u -o readonly=true pool/remotebackups/zarray/Books</code></li>
+</ol>
 <h3 id="subsequent-incremental-sync">Subsequent Incremental Sync</h3>
-<p>1) Log into <code>zfsbackup</code> on the backup machine: <code>su zfsbackup</code>
-2) Rotate snapshot on the source dataset via ssh: <code>ssh zfsbackup@MAINSERVERIP zfs rename zarray/Books@remotebackup-snapshot zarray/Books@remotebackup-snapshot-1</code>
-3) Create new snapshot on the source dataset via ssh: <code>ssh zfsbackup@MAINSERVERIP zfs snapshot zarray/Books@remotebackup-snapshot</code>
-4) Rotate snapshot on the backup dataset: <code>zfs rename pool/remotebackups/zarray/Books@remotebackup-snapshot pool/remotebackups/zarray/Books@remotebackup-snapshot-1</code>
-5) Perform incremental sync via ssh: <code>ssh zfsbackup@MAINSERVERIP zfs send -vi zarray/Books@remotebackup-snapshot-1 zarray/Books@remotebackup-snapshot | zfs receive -o canmount=noauto -u -o readonly=true pool/remotebackups/zarray/Books</code></p>
+<ol>
+<li>Log into <code>zfsbackup</code> on the backup machine: <code>su zfsbackup</code></li>
+<li>Rotate snapshot on the source dataset via ssh: <code>ssh zfsbackup@MAINSERVERIP zfs rename zarray/Books@remotebackup-snapshot zarray/Books@remotebackup-snapshot-1</code></li>
+<li>Create new snapshot on the source dataset via ssh: <code>ssh zfsbackup@MAINSERVERIP zfs snapshot zarray/Books@remotebackup-snapshot</code></li>
+<li>Rotate snapshot on the backup dataset: <code>zfs rename pool/remotebackups/zarray/Books@remotebackup-snapshot pool/remotebackups/zarray/Books@remotebackup-snapshot-1</code></li>
+<li>Perform incremental sync via ssh: <code>ssh zfsbackup@MAINSERVERIP zfs send -vi zarray/Books@remotebackup-snapshot-1 zarray/Books@remotebackup-snapshot | zfs receive -o canmount=noauto -u -o readonly=true pool/remotebackups/zarray/Books</code></li>
+</ol>
 <h3 id="clean-up-after-sync">Clean Up After Sync</h3>
-<p>1) On the main machine edit the root crontab via <code>sudo crontab -e</code> and add an entry to delete the rotated snapshot: <code>17 0 * * * zfs destroy zarray/Books@remotebackup-snapshot-1</code>
-2) On the backup machine edit the root crontab via <code>sudo crontab -e</code> and add an entry to delete the rotated snapshot: <code>17 0 * * * zfs destroy pool/remotebackups/zarray/Books@remotebackup-snapshot-1</code></p>
+<ol>
+<li>On the main machine edit the root crontab via <code>sudo crontab -e</code> and add an entry to delete the rotated snapshot: <code>17 0 * * * zfs destroy zarray/Books@remotebackup-snapshot-1</code></li>
+<li>On the backup machine edit the root crontab via <code>sudo crontab -e</code> and add an entry to delete the rotated snapshot: <code>17 0 * * * zfs destroy pool/remotebackups/zarray/Books@remotebackup-snapshot-1</code></li>
+</ol>
 <h2 id="my-ugly-script">My Ugly Script</h2>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
@@ -860,7 +868,7 @@ fn_notify<span class="w"> </span><span class="o">()</span><span class="w"> </spa
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="May 14, 2025 18:15:40"><span class="timeago" datetime="2025-05-14T18:15:40+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="May 14, 2025 18:15:40">2025-05-14</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="May 17, 2025 18:31:40"><span class="timeago" datetime="2025-05-17T18:31:40+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="May 17, 2025 18:31:40">2025-05-17</span>
   </span>
 
     
