@@ -13,8 +13,8 @@
     <language>en</language>
 
     
-    <pubDate>Sat, 17 May 2025 20:51:24 -0000</pubDate>
-    <lastBuildDate>Sat, 17 May 2025 20:51:24 -0000</lastBuildDate>
+    <pubDate>Mon, 19 May 2025 19:11:08 -0000</pubDate>
+    <lastBuildDate>Mon, 19 May 2025 19:11:08 -0000</lastBuildDate>
     <ttl>1440</ttl>
 
     
@@ -30,6 +30,26 @@
     
 
     
+    
+    <item>
+      <title>Tape Backup</title>
+      
+      
+      
+      
+        
+      <category>Other</category>
+        
+      
+      <description>&lt;h1&gt;Tape Backup&lt;/h1&gt;
+&lt;p&gt;A few months ago, I picked up a used LTO-6 internal tape drive on eBay for $300. Admittedly, it was an impulse buy. I also gambled because the...&lt;/p&gt;</description>
+      <link>https://aptalca.github.io/musings/Other/tape_backup/</link>
+      <pubDate>Mon, 19 May 2025 19:10:39 +0000</pubDate>
+      <source url="https://aptalca.github.io/musings/feed_rss_updated.xml">Aptalca's Musings</source>
+      
+      <guid isPermaLink="true">https://aptalca.github.io/musings/Other/tape_backup/</guid>
+      
+    </item>
     
     <item>
       <title>Cellular Backup</title>

@@ -9,6 +9,18 @@
     "language": "en",
     "items": [
         {
+            "id": "https://aptalca.github.io/musings/Other/tape_backup/",
+            "url": "https://aptalca.github.io/musings/Other/tape_backup/",
+            "title": "Tape Backup",
+            "content_html": "<h1>Tape Backup</h1>\n<p>A few months ago, I picked up a used LTO-6 internal tape drive on eBay for $300. Admittedly, it was an impulse buy. I also gambled because the...</p>",
+            "image": null,
+            "date_published": "2025-05-19T19:10:39+00:00",
+            "authors": [],
+            "tags": [
+                "Other"
+            ]
+        },
+        {
             "id": "https://aptalca.github.io/musings/Other/cellular_backup/",
             "url": "https://aptalca.github.io/musings/Other/cellular_backup/",
             "title": "Cellular Backup",

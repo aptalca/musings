@@ -1,0 +1,1139 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Aptalca's Musings">
+      
+      
+      
+        <link rel="canonical" href="https://aptalca.github.io/musings/Other/tape_backup/">
+      
+      
+        <link rel="prev" href="../cellular_backup/">
+      
+      
+        <link rel="next" href="../zfs_send_receive/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../images/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Tape Backup - Aptalca's Musings</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tape-backup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://aptalca.github.io/musings" title="Aptalca&#39;s Musings" class="md-header__button md-logo" aria-label="Aptalca's Musings" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Aptalca's Musings
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Tape Backup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aptalca/musings" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../cellular_backup/" class="md-tabs__link">
+          
+  
+  
+  Other
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://aptalca.github.io/musings" title="Aptalca&#39;s Musings" class="md-nav__button md-logo" aria-label="Aptalca's Musings" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Aptalca's Musings
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aptalca/musings" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Other
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Other
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cellular_backup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cellular Backup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Tape Backup
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tape Backup
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    <span class="md-ellipsis">
+      Background
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardware
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Software">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tape-drive-general-facts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tape Drive General Facts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#writing-to-tape" class="md-nav__link">
+    <span class="md-ellipsis">
+      Writing To Tape
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reading-from-tape" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading From Tape
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-notice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Important Notice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fully-automated-incremental-tape-backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fully Automated Incremental Tape Backups
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-tape-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up The Tape Container:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-initialize-a-tape" class="md-nav__link">
+    <span class="md-ellipsis">
+      How To Initialize A Tape
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-do-an-incremental-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      How To Do An Incremental Backup:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-do-a-restore" class="md-nav__link">
+    <span class="md-ellipsis">
+      How To Do A Restore:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#my-current-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      My Current Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#misconception-that-bit-me-in-the-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Misconception That Bit Me In The A$$
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zfs_send_receive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ZFS Send/Receive
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zfshost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Zfshost
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    <span class="md-ellipsis">
+      Background
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardware
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Software">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tape-drive-general-facts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tape Drive General Facts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#writing-to-tape" class="md-nav__link">
+    <span class="md-ellipsis">
+      Writing To Tape
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reading-from-tape" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading From Tape
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-notice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Important Notice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fully-automated-incremental-tape-backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fully Automated Incremental Tape Backups
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-tape-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up The Tape Container:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-initialize-a-tape" class="md-nav__link">
+    <span class="md-ellipsis">
+      How To Initialize A Tape
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-do-an-incremental-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      How To Do An Incremental Backup:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-do-a-restore" class="md-nav__link">
+    <span class="md-ellipsis">
+      How To Do A Restore:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#my-current-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      My Current Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#misconception-that-bit-me-in-the-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Misconception That Bit Me In The A$$
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+        <a href="../../.#tag:other" class="md-tag">Other</a>
+      
+    
+  </nav>
+
+
+
+<h1 id="tape-backup">Tape Backup</h1>
+<p>A few months ago, I picked up a used LTO-6 internal tape drive on eBay for $300. Admittedly, it was an impulse buy. I also gambled because the seller listed it with no guarantees but a simple statement <code>pulled from a working server</code>. Luckily the gamble paid off and I received a working unit.</p>
+<p>The reasons I looked for a tape drive in the first place were that one, I had always been curious about the tech, and two, I recently downsized my homelab significantly. Reducing storage capacity meant I would have to *<strong>gasp</strong>* delete some of my <em>meticulously curated</em> (not hoarded, mind you) media. I figured I could perhaps write them to tape drives so they weren't forever lost.</p>
+<p>There was quite a steep learning curve and some challenges with regards to both the hardware and the software aspects of this tech. In this article, I'll chronicle my journey.</p>
+<h2 id="background">Background</h2>
+<p>For over a decade, I relied on a main server that was built inside of a 4U rack case with three 5-in-3 hot swap cages. Initially it had a Supermicro X9SCA-F board with an Intel Xeon E5-2670v1. I'm <del>frugal</del> budget conscious when it comes to electronics and I got the CPU used, which I believe was pulled from a server at a Facebook data center. Coming from a super cheap but single core AMD Sempron 145 (later unlocked to dual core Athlon II X2 4450e... whee!), it was a tremendous upgrade. It transformed my basic NAS into a proper server that could handle multiple VMs with GPU passthrough and many docker containers. I had a dozen HDDs and multiple GPUs in there. It was a lot of fun messing around with it and I certainly had the time then. Learned a ton in the process.</p>
+<p>Over the years, the board and the CPU got upgraded to a more modern Supermicro X11SCA-F and Intel Xeon E-2146G, and the HDDs went from a mix of 1-3TB drives to mostly 8TB drives (most of them shucked from external drives of course).</p>
+<p>At some point I added a backup server with a budget Pentium G4600 in a midsize tower with decommissioned 1-3TB HDDs.</p>
+<p>Fast forward to a few months ago, my needs and circumstances completely changed. We are about to move to a house with no basement, so keeping these big and noisy servers in a basement, out of sight and mind, is no longer an option. I had to consolidate and downsize everything in my homelab. Low power and low noise became an important factor.</p>
+<p>For the main server, I opted for a tiny but relatively powerful server with an Intel N305 CPU in a Jonsbo N2 case. I detailed that server in <a href="../zfshost/">this article</a>.</p>
+<p>For the backup server, I built something with almost all spare parts that I had lying around in my homelab (curated, not hoarded). It turned into a real Frankenstein's Monster of a server. I had to get pretty creative and feel real proud of the outcome. I will outline that below.</p>
+<h2 id="hardware">Hardware</h2>
+<p>First of all, this backup server was not pre-planned in any way, shape or form. It is a result of a series of <code>oh, I should figure out a way to connect X device</code> and <code>oh wait, I do have this component in the closet</code> types of thoughts and evolved into its current form.</p>
+<p>Behold the Frankenstein's Monster aka Ghettolab:</p>
+<p><img alt="backup_server_1" src="../images/backup_server_1.png" /></p>
+<p><img alt="backup_server_2" src="../images/backup_server_2.png" /></p>
+<ol>
+<li>Tape Drive: Dell LTO-6 internal SAS drive. Main motivation for building the backup server. I really wanted to be able to use this thing that I had just acquired. But since downsizing the main server as well as the router, I had no devices I could attach this thing to. Because it's SAS, it needs an HBA, which needs a pci-e port. I was not able to find a SAS-USB adapter at a reasonable cost. It also needs SATA power, more power than a HDD, which needed a PSU.</li>
+<li>HBA: Tape drive needs an HBA that supports SAS and I had an older Dell Perc 200 that was decommissioned along with my old main server. The new server (<a href="../zfshost/">Zfshost</a>) only supports 5 HDDs and it has a built in backplane. Now I had to find a motherboard to hook up the HBA to.</li>
+<li>Motherboard: <a href="https://www.linuxserver.io/blog/taking-the-zimaboard-for-a-spin">ZimaBoard</a>. I had this ZimaBoard for a few years. It's a very cool device because while it's tiny, it has a pci-e slot on the side (Gen2 x4). It served as my OPNsense router in the last couple of years, but I recently decommissioned it because with 2 SSDs and an Intel pci-e card, all hanging out, it looked too fragile (not a quality I want in a router). I replaced it with an N150 box with 4 Intel 2.5G ports, with an M2 NVME and an SSD, all internal, which looks a lot sturdier. So the Zima was a perfect choice for hosting the HBA and the tape drive.</li>
+<li>PSU: I initally hooked up a decommissioned 750W PSU, which was overkill for the setup and was huge. Now I had a Medusa on my hands. ZimaBooard connected to HBA, connected to tape drive, connected to PSU, all hanging out and too fragile (not to mention ugly). Then I remembered this old case I had that happened to have a 5,25 inch slot I never used. It also had a built-in PSU (nothing fancy, but enough for the tape drive and a couple of drives). So I scrapped the separate PSU idea in favor of the case with the built-in PSU.</li>
+<li>Case: An old case I had from 2008 where it served as my first HTPC case. This thing sat under my TV and served my movies and TV shows through initially Meedio, then XBMC for years. Before I built a NAS, this thing had multiple external HDDs attached to it and was starting to look like Medusa. After building a NAS and switching to an even smaller HTPC for the living room, this case moved to the basement and was connected to my 3D 1080p projector and surround sound system (man cave). After getting replace again, this time by a FireTV, it became my router, first on PfSense and later on OPNsense, with an added low profile dual nic gigabit Intel pci-e card. Finally in 2023, it was replaced by a Zimaboard with a dual nic Intel pci-e card (this time 2.5G). Since then it was sitting in a closet, looking sad. So many memories. It became perfect housing for this Monster, thanks to its built-in PSU and the 5.25 inch drive slot. I took out the old motherboard and insterted the ZimaBoard along with the HBA (held in place by velcro fastener).</li>
+<li>Drives: Now that I got a backup server with a tape drive set up, I figured I could pop in a larger HDD to hold some ZFS snapshots. So I went with a decommissioned 250GB SSD as the OS drive, and I put in a decommissioned 6TB HDD with ZFS as the data drive. It has no mirroring or parity yet (I only had one 6TB drive and there wasn't any room in the case for another anyway). But that's OK as this is strictly a backup server anyway (Insert Rocky IV gif <code>If he dies, he dies</code>).</li>
+<li>Cabling: This is where I had to get creative. Things were pretty cramped in there. Due to cables not reaching, I initially had to connect the SSD to the HBA. However that caused a lot of issues because booting from an older HBA is finnicky. My HBA (or its firmware) didn't support UEFI. Legacy booting for some reason didn't work with Debian Bookworm. At first I used the internal eMMC hosted CasaOS's grub to boot into Debian on SSD, but then I got some extenders and connected both drives directly to the ZimaBoard for data, but put them on the PSU instead of powering from the ZimaBoard (it is not recommended to have the ZimaBoard power an HDD and and SSD at the same time).</li>
+</ol>
+<p>I'm pretty proud of the outcome. I now have a low power and quiet backup server with 6TB of storage and a tape drive, in a nice little sturdy bundle and best of all, it didn't cost me anything extra apart from the $3 SATA power extender cable.</p>
+<h2 id="software">Software</h2>
+<p>I put Debian Bookworm on the SSD. Formatted ext4, nothing fancy. The 6TB HDD holds a ZFS pool so it can <a href="../zfs_send_receive/">receive ZFS snapshots</a> from the main server. It only has 3 services running on there as docker containers:
+1. <a href="https://beszel.dev/">Beszel Agent</a>: Server monitoring. Not nearly as customizable or featureful as a Grafana stack, but much much easier to set up and maintain.
+2. AdGuard-Home: Backup instance in case the main server is down for maintenance. Set up on mobile devices as the second DNS.
+3. <a href="https://github.com/aptalca/tape">Tape</a>: My custom docker container built for using a tape drive, complete with screen, cron and backup scripts.</p>
+<p>ZFS receive functionality is thoroughly detailed in <a href="../zfs_send_receive/">this linked article</a> so I won't get into that here.</p>
+<p>This section will focus mainly on the tape drive functionality via my custom docker container.</p>
+<p>Most tape drives should be automatically detected by a recent kernel and various devices should be created (ie. <code>/dev/stX</code> and <code>/dev/nstX</code>). Interfacing with these devices can be accomplished via the <code>mt-st</code> package that provides the <a href="https://manpages.debian.org/stretch/mt-st/mt.1.en.html"><code>mt</code> command</a>. However, keep in mind that the <code>mt</code> command provides raw access to the blocks on tape and by default there is no filesystem. You can put a filesystem on there, as there is a foss option called LTFS, but given how tapes are best used for sequential reading and writing, and they're very slow at seeking, LTFS provides low performance compared to other modern storage options. I played with it a little bit, and decided against it.</p>
+<h3 id="tape-drive-general-facts">Tape Drive General Facts</h3>
+<ul>
+<li>Tapes are good for about 30 years, which makes them a great long term storage option. They are also not very expensive especially considering the long lifetime.</li>
+<li>Tape drives are for sequential reading and writing. Each tar file is written and appended with an <code>EOF</code> marker that defines the end of the file.</li>
+<li>Tape drives can easily and relatively quickly identify the EOF files to determine the beginning and end of each file.</li>
+<li>Writing and reading operations always begin on where the drive head currently is. Pay close attention to that prior to each operation.</li>
+<li><code>/dev/st0</code> is a rewinding device. After each operation, the tape is rewound to the beginning. <code>/dev/nst0</code> is non-rewinding and the head remains at its location at the end of each operation.</li>
+<li>To move the tape drive head, <code>mt</code> command is used. To read or write, <code>tar</code> is used (fun fact: tar acronym stands for <code>tape archive</code>).</li>
+<li><code>mt -f /dev/nst0 status</code> will show the status of the drive head. If it's at a file (vs a block), it will list the <code>File number</code>. If it's at the beginning of a file, it will list <code>EOF</code> at the bottom (except for the first file, which is really called <code>File number=0</code>, which will show <code>BOT</code> indicating the <code>beginning of tape</code>).</li>
+<li>You can seek to the beginning via <code>mt -f /dev/nst0 rewind</code> or <code>mt -f /dev/nst0 asf 0</code></li>
+<li>You can seek to the beginning of any file via <code>mt -f /dev/nst0 asf X</code>with <code>X</code> being the file number (starting from <code>0</code>)</li>
+<li>You can seek to the end of tape via <code>mt -f /dev/nst0 eod</code></li>
+<li>From the end, you can seek to the beginning of the last file via <code>mt -f /dev/nst0 bsfm 2</code></li>
+</ul>
+<h3 id="writing-to-tape">Writing To Tape</h3>
+<ul>
+<li>For the first write, make sure to rewind via <code>mt -f /dev/nst0 rewind</code> and confirm with <code>status</code>.</li>
+<li>With tar, you can write directly to the tape via <code>tar -cvf /dev/nst0 sourcedirectory1 sourcedirectory2</code>.</li>
+<li>If you used the non-rewinding <code>nst0</code> device, the drive head should be at the beginning of the second file, indicated by <code>File number=1</code> and <code>EOF</code> in <code>status</code> output.</li>
+<li>To write the second file, make sure the <code>status</code> shows <code>File number=1</code> and <code>EOF</code>.</li>
+<li>Same command, <code>tar -cvf /dev/nst0 sourcedirectory1 sourcedirectory2</code>, will now write the second tar file and the head should move to <code>File number=2</code>.</li>
+<li>If you overwrite the first file, all subsequent files will be lost. Pay attention to where the head is before each write operation. You can use <code>mt</code> to forward to the end of the tape to be sure.</li>
+<li>For long operations run manually via cli, you can use <code>screen</code> so you don't have to keep a shell open.</li>
+</ul>
+<h3 id="reading-from-tape">Reading From Tape</h3>
+<ul>
+<li>You can seek to the beginning of files with the command <code>mt -f /dev/nst0 asf X</code> with X being the file number (starting with 0).</li>
+<li>To copy the first file from tape to the current folder on the local machine, rewind via <code>mt -f /dev/nst0 rewind</code> (or via <code>mt -f /dev/nst0 asf 0</code>).</li>
+<li>Use the tar command to extract from tape: <code>tar -xvf /dev/nst0</code>. It will read the first file all the way to the EOF, and extract it to the local disk.</li>
+<li>To copy the second file from tape, seek to it via <code>mt -f /dev/nst0 asf 1</code> and extract via <code>tar -xvf /dev/nst0</code>.</li>
+<li>For long operations run manually via cli, you can use <code>screen</code> so you don't have to keep a shell open.</li>
+</ul>
+<h3 id="important-notice">Important Notice</h3>
+<p>Never do <code>mt -f /dev/nst0 erase</code> unless you know it's really what you want. The manpage is not clear about it, but it actually does a <code>secure erase</code>, it takes a really long time (8+ hrs) and you can't cancel it once started. Killing or force killing the process doesn't work, <code>docker stop</code> and <code>docker kill</code> fail. The only way is to cut the power to the drive, which could damage the drive head.</p>
+<h3 id="fully-automated-incremental-tape-backups">Fully Automated Incremental Tape Backups</h3>
+<p>I realize larger organizations often rely on tape libraries with autoloaders and proprietary software solutions to manage their backups. Unfortunately I do not have those luxuries in my humble homelab.</p>
+<p>I wanted a simple (KISS) solution for backing up different source folders to different tapes, in an incremental manner without user input (other than switching tapes). My time is limited and precious. I also wanted it to be foolproof so that I couldn't mess it up if I wanted to. I'm often doing homelab projects in a rush so my manual tasks are prone to typos and errors.</p>
+<p>So I came up with a sample script included <a href="https://github.com/aptalca/tape/blob/main/root/defaults/tape.sh">in this linked repo</a>.</p>
+<p>It basically does incremental backups to tape. However, the source directories (along with some optional custom tar arguments) as well as the last tar snapshot file are saved on tape so that whenever you switch the tape out, the script automatically retrieves these from the tape itself to figure it all out. My motivation for this last step was borne out of the fact that my backup server does not have any built-in redundancies (remember the Rocky IV quote from earlier). If it dies, I didn't want to lose any data related to the tape backups so I made sure all tape backup related data was also stored on the tapes themselves, so that all future incremental backups and restores can be performed with access to just the tape itself.</p>
+<p>All you do is stick a pre-initialized tape into the drive, and run the script (manually or via cron). The script also helps you initialize a tape.</p>
+<p>You can have one tape that backs up your computer backup folders. Another tape that backs up your family photos. Or perhaps a second tape for your family photos for good measure, but with different increments. It's easy. Just stick a tape into the drive and run the script. It will <em>automagically</em> figure out the source folders, custom tar arguments and the last snapshot state; and it will write a new incremental tar to tape.</p>
+<h3 id="setting-up-the-tape-container">Setting Up The Tape Container:</h3>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">tape</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/aptalca/tape</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tape</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/aptalca/appdata/tape:/config</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/mnt:/mnt</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">PUID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">      </span><span class="nt">PGID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">      </span><span class="nt">TZ</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">America/New_York</span>
+<span class="w">    </span><span class="nt">devices</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/st0:/dev/st0</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/nst0:/dev/nst0</span>
+<span class="w">    </span><span class="nt">cpus</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">    </span><span class="nt">mem_limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5g</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+</code></pre></div>
+<p>Just save the above yaml as <code>docker-compose.yml</code> and do <code>docker compose up -d</code> and you'll have a working tape container with all the necessary tools inside.</p>
+<h3 id="how-to-initialize-a-tape">How To Initialize A Tape</h3>
+<ol>
+<li>Exec into the running container and run the init script: <code>docker exec -it tape /config/tape.sh init</code></li>
+<li>Enter the necessary information requested.</li>
+<li>You can include tar arguments as part of the directories. For instance, I don't like to include the full path of my backed up folders so I set a base folder and then define a folder inside to be backed up, ie. <code>-C /mnt/pool/Pictures All</code>. When you restore that backup, it will result in the extracted folder as <code>All</code> and not <code>mnt/pool/Pictures/All</code>.</li>
+</ol>
+<p>Now you should have a tape initialized with <code>file 0</code> containing the tarball of your source directories and <code>file 1</code> containing the tar snapshot and the directories.txt file. When the backup script is run, it will first retrieve these index files, use them to generate a new incremental tar and write the pair to tape.</p>
+<h3 id="how-to-do-an-incremental-backup">How To Do An Incremental Backup:</h3>
+<ol>
+<li>Run this script manually (<code>screen docker exec -it tape /config/tape.sh</code>) or via cron with no arguments (<code>7 5 * * 0 /config/tape.sh &gt;&gt; /config/logs/log.txt 2&gt;&amp;1 &amp;&amp; chown abc:abc /config/logs/log.txt</code>)</li>
+</ol>
+<p>It will seek to the end of tape, and then move to the beginning of the last file written. It will read the last backup's state info and the directories to create a diff. It will seek to the beginning of the next file, write the incremental tar, then it will move to the next file again and write the latest state file and the directories.</p>
+<h3 id="how-to-do-a-restore">How To Do A Restore:</h3>
+<ol>
+<li>Exec into the running container and run the restore script: <code>docker exec -it tape /config/tape.sh restore</code></li>
+<li>Enter the necessary information requested</li>
+</ol>
+<p>Once the base folder is selected (defaults to <code>/config</code>), it will rewind the tape and extract every single tar file from tape into the base folder.</p>
+<h3 id="my-current-workflow">My Current Workflow</h3>
+<p>My most valuable data is my family photos and videos. I dedicated two tapes to that. I usually keep one of those in the tape drive and on cron, it does weekly incremental backups. Every couple of weeks, I switch it out for the other one. That's all the maintenance it takes.</p>
+<p>I also have a couple of other tapes for miscellaneous data I acquired over the years. Some work documents, some computer backups, etc. Those don't change that much. When they do, I stick the tape in, run a manual incremental backup through screen, and switch it back to one of the family photos tapes. It's very much a set it and forget it type of workflow. I also tested restores and they worked beautifully.</p>
+<p>With this, I am pretty confident about mitigating data loss. My main server has ZFS with dual parity and plenty of snapshots. Backup server receives zfs snapshots from the main and stores them. Crucial data is written to tape regularly. Plus I upload to Backblaze B2, which provides the offsite storage. I feel anything more would be overkill (I hope I'm not wrong about this).</p>
+<h2 id="misconception-that-bit-me-in-the-a">Misconception That Bit Me In The A$$</h2>
+<p>In the opening statement, I wrote that one of the main reasons for looking into tape drives was that I was downsizing my storage capacity and that I would like to write some of my data to tape instead of deleting it forever. Well, that assumption was based on a bold faced lie by the <code>Big Tape</code>. You see, when they talk about the specs of LTO-6, they list the tape capacity as 6.25TB compressed and they'll have a little footnote that shows 2.5TB uncompressed.</p>
+<p>I mistakenly assumed that the <code>compressed</code> part was similar to how the 3.5 inch floppy disks went from having 720KB space to 1.44MB by simply writing at a higher density to the same size disk back in the late 80s and early 90s. I even remember drilling holes in my existing 720KB disks to have them detected as high density disks so I could double the space (it wasn't recommended for crucial data but they mainly held my Amiga games at the time so all was well, but I digress).</p>
+<p>Unfortunately in this case, <code>compressed</code> literally means compressed (lossless) like zip, gzip and the like. It turns out, these drives have built in hardware acceleration for a lossless compression algorithm that they utilize when writing to and reading from tape. This is completely invisible to the user. Sure, if you're writing a ton of text files, the drive will be able to compress it greatly and it will take up much less space on tape. So they came up with some theoretical (made up) average compression ratio of <code>2.5:1</code> so they can inflate the advertised storage capacity to 6.25TB.</p>
+<p>However, in this day and age, most data I'm writing to tape is already heavily compressed (think JPG, MP4, etc.) and therefore whatever algorith the drive utilizes is unable to compress them any further. So in my tests, I quickly realized that the actual storage capacity was much much closer to the uncompressed 2.5TB (I exaggarate, it was practically equal to 2.5TB).</p>
+<p>This fact threw a wrench in my whole plan to preserve my carefully curated media archive as I realized I would need two and a half times the number of tapes than I originally had planned for. That number (I'm embarrased to spell it out) was not feasible in terms of both cost and physical storage space. Sadly, I had to delete my carefully curated media archive forever. Thanks <code>Big Tape</code>.</p>
+<p>But at least I learned a lot about the tape tech and ended up with a pretty cool and effortless additional backup method.</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="May 19, 2025 19:10:39"><span class="timeago" datetime="2025-05-19T19:10:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="May 19, 2025 19:10:39">2025-05-19</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="May 19, 2025 19:10:39"><span class="timeago" datetime="2025-05-19T19:10:39+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="May 19, 2025 19:10:39">2025-05-19</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Footer -->
+<footer class="md-footer">
+
+  <!-- Link to previous and/or next page -->
+  
+    <nav
+      class="md-footer__inner md-grid"
+      aria-label="footer.title"
+    >
+
+      <!-- Link to previous page -->
+      
+        
+        <a
+          href="../cellular_backup/"
+          class="md-footer__link md-footer__link--prev"
+          aria-label="Previous: Cellular Backup"
+          rel="prev"
+        >
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Cellular Backup
+            </div>
+          </div>
+        </a>
+      
+
+      <!-- Link to next page -->
+      
+        
+        <a
+          href="../zfs_send_receive/"
+          class="md-footer__link md-footer__link--next"
+          aria-label="Next: ZFS Send/Receive"
+          rel="next"
+        >
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              ZFS Send/Receive
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+
+  <!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <!-- Social links -->
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="/feed_rss_created.xml" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32 229.8 0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7 0 64m0 352a64 64 0 1 1 128 0 64 64 0 1 1-128 0m32-256c159.1 0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7 0-32-14.3-32-32s14.3-32 32-32"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.instant", "search.suggest", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.highlight"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
+      
+    
+  </body>
+</html>
