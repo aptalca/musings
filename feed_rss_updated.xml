@@ -13,12 +13,12 @@
     <language>en</language>
 
     
-    <pubDate>Mon, 19 May 2025 19:30:30 -0000</pubDate>
-    <lastBuildDate>Mon, 19 May 2025 19:30:30 -0000</lastBuildDate>
+    <pubDate>Sat, 31 May 2025 17:14:05 -0000</pubDate>
+    <lastBuildDate>Sat, 31 May 2025 17:14:05 -0000</lastBuildDate>
     <ttl>1440</ttl>
 
     
-    <generator>MkDocs RSS plugin - v1.17.1</generator>
+    <generator>MkDocs RSS plugin - v1.17.3</generator>
 
     
     
@@ -30,6 +30,26 @@
     
 
     
+    
+    <item>
+      <title>Cellular Backup</title>
+      
+      
+      
+      
+        
+      <category>Other</category>
+        
+      
+      <description>&lt;h1&gt;Cellular Backup&lt;/h1&gt;
+&lt;p&gt;I spend quite a bit of time away from home and I do have a few somewhat critical services running in my homelab that I would like to be ab...&lt;/p&gt;</description>
+      <link>https://aptalca.github.io/musings/Other/cellular_backup/</link>
+      <pubDate>Sat, 31 May 2025 17:13:37 +0000</pubDate>
+      <source url="https://aptalca.github.io/musings/feed_rss_updated.xml">Aptalca's Musings</source>
+      
+      <guid isPermaLink="true">https://aptalca.github.io/musings/Other/cellular_backup/</guid>
+      
+    </item>
     
     <item>
       <title>Tape Backup</title>
@@ -48,26 +68,6 @@
       <source url="https://aptalca.github.io/musings/feed_rss_updated.xml">Aptalca's Musings</source>
       
       <guid isPermaLink="true">https://aptalca.github.io/musings/Other/tape_backup/</guid>
-      
-    </item>
-    
-    <item>
-      <title>Cellular Backup</title>
-      
-      
-      
-      
-        
-      <category>Other</category>
-        
-      
-      <description>&lt;h1&gt;Cellular Backup&lt;/h1&gt;
-&lt;p&gt;I spend quite a bit of time away from home and I do have a few somewhat critical services running in my homelab that I would like to be ab...&lt;/p&gt;</description>
-      <link>https://aptalca.github.io/musings/Other/cellular_backup/</link>
-      <pubDate>Sat, 17 May 2025 20:50:54 +0000</pubDate>
-      <source url="https://aptalca.github.io/musings/feed_rss_updated.xml">Aptalca's Musings</source>
-      
-      <guid isPermaLink="true">https://aptalca.github.io/musings/Other/cellular_backup/</guid>
       
     </item>
     
