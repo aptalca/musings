@@ -128,3 +128,39 @@ Set up a root crontab to run the script every minute
 I also installed Tailscale and Cloudflared. Tailscale allows ssh access into my LAN. Cloudflared allows me to serve the PiKVM interface over a Cloudflare tunnel. Both services punch out and automatically update the public IP so I can connect whether WAN is up or down.
 
 When WAN is active, which is the great majority of the time, there is no data transfer over cellular so I keep the metered data cost at an absolute minimum.
+
+## Update
+
+After over a year of successfully and reliably working, one day out of the blue, it stopped. We had a big power outage when I was away from home. The script successfully changed the metric of `eth0` from 100 to 2000, which would have made the `usb0` interface the active default. But that didn't happen. When the power came back and I was able to ssh in to my lan, I saw that there was no `usb0` interface (_**facepalm**_).
+
+`lsusb` listed the usb modem, but there was no interface. After a lengthy troubleshooting session, going down several rabbit holes, I had another facepalm moment when I realized the interface was indeed created, but it was now named `eth1` (_**sigh**_) and obviously down since the netplan config tries to enable an interface named `usb0`. `dmesg` output confirmed the finding:
+
+```
+usb 1-1.3: New USB device found, idVendor=19d2, idProduct=1405, bcdDevice=54.18
+usb 1-1.3: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1.3: Product: ZTE Mobile Broadband
+usb 1-1.3: Manufacturer: ZTE,Incorporated
+cdc_ether 1-1.3:1.0 eth1: register 'cdc_ether' at usb-0000:01:00.0-1.3, ZTE CDC Ethernet Device, xx:xx:xx:xx:xx:xx
+usbcore: registered new interface driver cdc_ether
+```
+
+Somehow (maybe a kernel update?? or maybe udev??) the behavior changed and `cdc_ether` now creates the interface with the `eth` prefix instead of `usb`. I'm not happy with this situtation as it completely broke my backup internet (_**it had one job**_).
+
+So I thought, no big deal, I'll create a udev rule to set a static interface name by mac address. Unfortunately, the mac address gets randomly assigned on connect/boot and changes every time (_**facepalm #3**_).
+
+Instead, I settled on using the usb bus id to set the following udev rule:
+```
+$ cat /etc/udev/rules.d/10-custom-cel0.rules 
+KERNELS=="1-1.3:1.0", NAME="cel0"
+```
+
+Then I modified the netplan config to enable the new interface `cel0` instead of the previous `usb0`.
+
+`dmesg` output confirms the interface rename:
+```
+cdc_ether 1-1.3:1.0 eth1: register 'cdc_ether' at usb-0000:01:00.0-1.3, ZTE CDC Ethernet Device, xx:xx:xx:xx:xx:xx
+usbcore: registered new interface driver cdc_ether
+cdc_ether 1-1.3:1.0 cel0: renamed from eth1
+```
+
+Since this is a dedicated device that I never touch, I'll just make sure to leave the usb modem connected to the same port and hope that the ids don't change in the future, rendering the udev rule useless.
