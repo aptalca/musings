@@ -2,22 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://aptalca.github.io/musings/</loc>
-         <lastmod>2025-05-31</lastmod>
+         <lastmod>2025-08-21</lastmod>
     </url>
     <url>
          <loc>https://aptalca.github.io/musings/Other/cellular_backup/</loc>
-         <lastmod>2025-05-31</lastmod>
+         <lastmod>2025-08-21</lastmod>
     </url>
     <url>
          <loc>https://aptalca.github.io/musings/Other/tape_backup/</loc>
-         <lastmod>2025-05-31</lastmod>
+         <lastmod>2025-08-21</lastmod>
     </url>
     <url>
          <loc>https://aptalca.github.io/musings/Other/zfs_send_receive/</loc>
-         <lastmod>2025-05-31</lastmod>
+         <lastmod>2025-08-21</lastmod>
     </url>
     <url>
          <loc>https://aptalca.github.io/musings/Other/zfshost/</loc>
-         <lastmod>2025-05-31</lastmod>
+         <lastmod>2025-08-21</lastmod>
     </url>
 </urlset>

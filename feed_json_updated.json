@@ -9,24 +9,24 @@
     "language": "en",
     "items": [
         {
-            "id": "https://aptalca.github.io/musings/Other/cellular_backup/",
-            "url": "https://aptalca.github.io/musings/Other/cellular_backup/",
-            "title": "Cellular Backup",
-            "content_html": "<h1>Cellular Backup</h1>\n<p>I spend quite a bit of time away from home and I do have a few somewhat critical services running in my homelab that I would like to be ab...</p>",
+            "id": "https://aptalca.github.io/musings/Other/tape_backup/",
+            "url": "https://aptalca.github.io/musings/Other/tape_backup/",
+            "title": "Tape Backup",
+            "content_html": "<h1>Tape Backup</h1>\n<p>A few months ago, I picked up a used LTO-6 internal tape drive on eBay for $300. Admittedly, it was an impulse buy. I also gambled because the...</p>",
             "image": null,
-            "date_modified": "2025-05-31T17:13:37+00:00",
+            "date_modified": "2025-08-21T19:25:45+00:00",
             "authors": [],
             "tags": [
                 "Other"
             ]
         },
         {
-            "id": "https://aptalca.github.io/musings/Other/tape_backup/",
-            "url": "https://aptalca.github.io/musings/Other/tape_backup/",
-            "title": "Tape Backup",
-            "content_html": "<h1>Tape Backup</h1>\n<p>A few months ago, I picked up a used LTO-6 internal tape drive on eBay for $300. Admittedly, it was an impulse buy. I also gambled because the...</p>",
+            "id": "https://aptalca.github.io/musings/Other/cellular_backup/",
+            "url": "https://aptalca.github.io/musings/Other/cellular_backup/",
+            "title": "Cellular Backup",
+            "content_html": "<h1>Cellular Backup</h1>\n<p>I spend quite a bit of time away from home and I do have a few somewhat critical services running in my homelab that I would like to be ab...</p>",
             "image": null,
-            "date_modified": "2025-05-19T19:30:00+00:00",
+            "date_modified": "2025-05-31T17:13:37+00:00",
             "authors": [],
             "tags": [
                 "Other"
