@@ -45,6 +45,10 @@ Behold the Frankenstein's Monster aka Ghettolab:
 
 I'm pretty proud of the outcome. I now have a low power and quiet backup server with 6TB of storage and a tape drive, in a nice little sturdy bundle and best of all, it didn't cost me anything extra apart from the $3 SATA power extender cable.
 
+**UPDATE: Added PiKVM (and case) power control**
+
+Fast forward a couple of months, I loved being able to monitor this machine remotely via PiKVM and the amazing [PiKVM Switch](https://docs.pikvm.org/switch/), which allows for monitoring multiple devices via a single PiKVM. The switch comes with four ATX modules and I figured, why not? So I soldered some copper multi-strand wires to the [ATX headers on the ZimaBoard](https://www.zimaspace.com/docs/zimaboard/Hardware-Interface-Introduction#Pinouts). The solder job was one of the most stressful things I've ever done, but while not pretty, it works. The ATX module fit right into the single low profile pci-e slot in the case. Now I can power control the ZimaBoard via PiKVM, which is awesome. And as a bonus, I was also able to wire the case front panel to the ATX module so now the case power and HDD leds display the Zima status, and the power button controls the Zima (which is quite funny).
+
 ## Software
 
 I put Debian Bookworm on the SSD. Formatted ext4, nothing fancy. The 6TB HDD holds a ZFS pool so it can [receive ZFS snapshots](zfs_send_receive.md) from the main server. It only has 3 services running on there as docker containers:
